@@ -1,0 +1,11 @@
+{
+    "extensionName": {
+        "message": "specio"
+    },
+    "extensionDescription": {
+        "message": "Detecta las tecnologías con las que está construido un sitio web."
+    },
+    "popupEmptyState": {
+        "message": "Aún no se detectan tecnologías."
+    }
+}
