@@ -1,0 +1,11 @@
+name: guard
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions: {}
+
+jobs:
+  develop-only:
+    uses: Glyndor/.github/.github/workflows/main-guard.yml@b78620146d50fdbc552e1b86740e64d114c58f0f # v1.0.0
