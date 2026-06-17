@@ -8,7 +8,11 @@ interface PageSignalsMessage {
 }
 
 function isPageSignalsMessage(message: unknown): message is PageSignalsMessage {
-	return typeof message === "object" && message !== null && (message as { type?: unknown }).type === "page-signals";
+	return (
+		typeof message === "object" &&
+		message !== null &&
+		(message as { type?: unknown }).type === "page-signals"
+	);
 }
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {

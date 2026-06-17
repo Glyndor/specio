@@ -16,11 +16,13 @@ interface PageSignals {
 function collectSignals(): PageSignals {
 	return {
 		html: document.documentElement.outerHTML,
-		scripts: Array.from(document.scripts, (script) => script.src).filter(Boolean),
+		scripts: Array.from(document.scripts, (script) => script.src).filter(
+			Boolean,
+		),
 		metas: Array.from(document.head.querySelectorAll("meta"), (meta) => ({
 			name: meta.getAttribute("name"),
-			content: meta.getAttribute("content")
-		}))
+			content: meta.getAttribute("content"),
+		})),
 	};
 }
 
