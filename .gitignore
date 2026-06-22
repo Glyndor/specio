@@ -1,3 +1,12 @@
 node_modules/
 dist/
 *.log
+
+# Agent / AI-tool artifacts — never commit (zero AI trace).
+.claude/
+.agents/
+.cursor/
+.aider*
+.continue/
+.playwright-mcp/
+**/*-mcp/
