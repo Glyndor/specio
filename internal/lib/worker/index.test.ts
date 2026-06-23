@@ -52,6 +52,34 @@ describe("DetectionStore", () => {
 		expect(store.get(1)).toEqual([]);
 	});
 
+	test("merges captured response headers so header-only rules fire", () => {
+		const store = new DetectionStore();
+		// Page signals alone (no headers) would not detect Nginx or PHP.
+		const detections = store.record(
+			2,
+			{ ...wordpressSignals, html: "" },
+			{
+				headers: {
+					server: "nginx/1.25.3",
+					"x-powered-by": "PHP/8.2.0",
+				},
+			},
+		);
+		const ids = detections.map((d) => d.id);
+		expect(ids).toContain("nginx");
+		expect(ids).toContain("php");
+		expect(detections.find((d) => d.id === "nginx")?.version).toBe(
+			"1.25.3",
+		);
+	});
+
+	test("captured headers do not break detection when signals are garbage", () => {
+		const store = new DetectionStore();
+		expect(
+			store.record(8, "garbage", { headers: { server: "nginx" } }),
+		).toEqual([]);
+	});
+
 	test("forget drops a tab's cache", () => {
 		const store = new DetectionStore();
 		store.record(3, wordpressSignals);
