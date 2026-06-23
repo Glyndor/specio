@@ -1,0 +1,98 @@
+/* Popup styling. Kept minimal and self-contained (no remote fonts or assets)
+   so the popup loads instantly and respects the strict extension CSP. */
+
+:root {
+	color-scheme: light dark;
+	--bg: #ffffff;
+	--fg: #1f2937;
+	--muted: #6b7280;
+	--border: #e5e7eb;
+	--confirmed: #16a34a;
+	--likely: #d97706;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #111827;
+		--fg: #f3f4f6;
+		--muted: #9ca3af;
+		--border: #374151;
+	}
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	min-width: 280px;
+	max-width: 360px;
+	font:
+		13px / 1.4 system-ui,
+		sans-serif;
+	background: var(--bg);
+	color: var(--fg);
+}
+
+#root {
+	padding: 8px 12px 12px;
+}
+
+.empty {
+	color: var(--muted);
+	text-align: center;
+	padding: 24px 8px;
+}
+
+.group {
+	margin-top: 12px;
+}
+
+.group h2 {
+	margin: 0 0 4px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--muted);
+}
+
+.group ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.tech {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 6px 0;
+	border-bottom: 1px solid var(--border);
+}
+
+.tech:last-child {
+	border-bottom: none;
+}
+
+.tech-name {
+	font-weight: 500;
+}
+
+.confidence {
+	font-size: 11px;
+	padding: 1px 6px;
+	border-radius: 999px;
+	border: 1px solid currentColor;
+	white-space: nowrap;
+}
+
+.confidence-confirmed {
+	color: var(--confirmed);
+}
+
+.confidence-likely {
+	color: var(--likely);
+}
