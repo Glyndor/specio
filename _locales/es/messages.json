@@ -23,6 +23,9 @@
     "category_ecommerce": {
         "message": "Comercio electrónico"
     },
+    "category_payment_processor": {
+        "message": "Procesador de pagos"
+    },
     "category_web_framework": {
         "message": "Framework web"
     },

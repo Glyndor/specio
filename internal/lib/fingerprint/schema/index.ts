@@ -18,6 +18,7 @@ export type Category =
 	| "analytics"
 	| "tag-manager"
 	| "ecommerce"
+	| "payment-processor"
 	| "programming-language"
 	| "web-framework"
 	| "font-script"

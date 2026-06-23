@@ -4,6 +4,7 @@
 // these to chrome's message, action, and tab events.
 
 import { type Detection, detectTechnologies } from "../detect/index.ts";
+import type { CapturedResponse } from "../headers/index.ts";
 import { parsePageSignals } from "../signals/parse/index.ts";
 
 /** Highest exact number shown on the badge before it switches to "99+". */
@@ -29,12 +30,20 @@ export class DetectionStore {
 	private readonly byTab = new Map<number, Detection[]>();
 
 	/**
-	 * Validate and bound an untrusted signals payload, detect, cache the result
-	 * for the tab, and return it. A payload that is not an object yields an
-	 * empty result rather than throwing.
+	 * Validate and bound an untrusted signals payload, merge in any response
+	 * headers the worker captured for the tab (which the content script cannot
+	 * see), detect, cache the result, and return it. A payload that is not an
+	 * object yields an empty result rather than throwing.
 	 */
-	record(tabId: number, rawSignals: unknown): Detection[] {
+	record(
+		tabId: number,
+		rawSignals: unknown,
+		captured?: CapturedResponse,
+	): Detection[] {
 		const signals = parsePageSignals(rawSignals);
+		if (signals && captured) {
+			signals.headers = { ...signals.headers, ...captured.headers };
+		}
 		const detections = signals ? detectTechnologies(signals) : [];
 		this.byTab.set(tabId, detections);
 		return detections;
