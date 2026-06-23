@@ -85,9 +85,15 @@ jobs:
           VERSION: ${{ needs.verify.outputs.version }}
         run: |
           set -euo pipefail
-          gh release view "v${VERSION}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1 \
-            || gh release create "v${VERSION}" --repo "${GITHUB_REPOSITORY}" --verify-tag --generate-notes
-          gh release upload "v${VERSION}" "specio-${VERSION}.zip" --clobber --repo "${GITHUB_REPOSITORY}"
+          # Releases are immutable, so the asset must be attached at creation —
+          # a later upload is rejected. Create the release with the zip in one
+          # shot; if it already exists (a re-run), leave it untouched.
+          if gh release view "v${VERSION}" --repo "${GITHUB_REPOSITORY}" >/dev/null 2>&1; then
+            echo "Release v${VERSION} already exists; leaving it untouched."
+          else
+            gh release create "v${VERSION}" --repo "${GITHUB_REPOSITORY}" \
+              --verify-tag --generate-notes "specio-${VERSION}.zip"
+          fi
 
   # Publish to the Chrome Web Store. Skipped (with a notice) when the store
   # secrets are not configured, so the GitHub release still ships.
