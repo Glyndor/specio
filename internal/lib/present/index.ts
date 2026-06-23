@@ -14,6 +14,7 @@ export const CATEGORY_ORDER: Category[] = [
 	"ui-framework",
 	"javascript-library",
 	"programming-language",
+	"payment-processor",
 	"web-server",
 	"reverse-proxy",
 	"cdn",
