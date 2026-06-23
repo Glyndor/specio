@@ -7,5 +7,56 @@
     },
     "popupEmptyState": {
         "message": "Aún no se detectan tecnologías."
+    },
+    "popupImplied": {
+        "message": "inferido"
+    },
+    "confidence_confirmed": {
+        "message": "Confirmado"
+    },
+    "confidence_likely": {
+        "message": "Probable"
+    },
+    "category_cms": {
+        "message": "CMS"
+    },
+    "category_ecommerce": {
+        "message": "Comercio electrónico"
+    },
+    "category_web_framework": {
+        "message": "Framework web"
+    },
+    "category_javascript_framework": {
+        "message": "Framework de JavaScript"
+    },
+    "category_ui_framework": {
+        "message": "Framework de interfaz"
+    },
+    "category_javascript_library": {
+        "message": "Biblioteca de JavaScript"
+    },
+    "category_programming_language": {
+        "message": "Lenguaje de programación"
+    },
+    "category_web_server": {
+        "message": "Servidor web"
+    },
+    "category_reverse_proxy": {
+        "message": "Proxy inverso"
+    },
+    "category_cdn": {
+        "message": "CDN"
+    },
+    "category_hosting": {
+        "message": "Alojamiento"
+    },
+    "category_tag_manager": {
+        "message": "Gestor de etiquetas"
+    },
+    "category_analytics": {
+        "message": "Analítica"
+    },
+    "category_font_script": {
+        "message": "Fuente web"
     }
 }

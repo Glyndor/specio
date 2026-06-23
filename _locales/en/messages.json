@@ -7,5 +7,56 @@
     },
     "popupEmptyState": {
         "message": "No technologies detected yet."
+    },
+    "popupImplied": {
+        "message": "inferred"
+    },
+    "confidence_confirmed": {
+        "message": "Confirmed"
+    },
+    "confidence_likely": {
+        "message": "Likely"
+    },
+    "category_cms": {
+        "message": "CMS"
+    },
+    "category_ecommerce": {
+        "message": "Ecommerce"
+    },
+    "category_web_framework": {
+        "message": "Web framework"
+    },
+    "category_javascript_framework": {
+        "message": "JavaScript framework"
+    },
+    "category_ui_framework": {
+        "message": "UI framework"
+    },
+    "category_javascript_library": {
+        "message": "JavaScript library"
+    },
+    "category_programming_language": {
+        "message": "Programming language"
+    },
+    "category_web_server": {
+        "message": "Web server"
+    },
+    "category_reverse_proxy": {
+        "message": "Reverse proxy"
+    },
+    "category_cdn": {
+        "message": "CDN"
+    },
+    "category_hosting": {
+        "message": "Hosting"
+    },
+    "category_tag_manager": {
+        "message": "Tag manager"
+    },
+    "category_analytics": {
+        "message": "Analytics"
+    },
+    "category_font_script": {
+        "message": "Font script"
     }
 }

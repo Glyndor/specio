@@ -4,14 +4,15 @@
         "module": "ESNext",
         "moduleResolution": "bundler",
         "lib": ["ES2022", "DOM", "DOM.Iterable"],
-        "types": ["chrome"],
+        "types": ["chrome", "bun"],
         "strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "rootDir": "internal",
-        "outDir": "dist",
+        "allowImportingTsExtensions": true,
+        "verbatimModuleSyntax": true,
+        "noEmit": true,
         "esModuleInterop": true,
         "skipLibCheck": true
     },
-    "include": ["internal"]
+    "include": ["internal", "tests"]
 }
