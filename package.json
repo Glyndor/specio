@@ -1,6 +1,6 @@
 {
     "name": "specio",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "private": true,
     "description": "Detect the technologies a website is built with.",
     "license": "Apache-2.0",
@@ -11,8 +11,9 @@
         "typecheck": "tsc --noEmit",
         "bundle:background": "bun build internal/background/index.ts --outfile dist/background/index.js --target browser --format esm --minify",
         "bundle:content": "bun build internal/content/index.ts --outfile dist/content/index.js --target browser --format iife --minify",
+        "bundle:content-main": "bun build internal/content/main-world.ts --outfile dist/content/main-world.js --target browser --format iife --minify",
         "bundle:popup": "bun build internal/popup/index.ts --outfile dist/popup/index.js --target browser --format esm --minify",
-        "bundle": "bun run bundle:background && bun run bundle:content && bun run bundle:popup",
+        "bundle": "bun run bundle:background && bun run bundle:content && bun run bundle:content-main && bun run bundle:popup",
         "build": "bun run typecheck && bun run bundle",
         "package": "bun run build && bun run scripts/package.ts",
         "test": "bun test"
