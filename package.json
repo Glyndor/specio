@@ -1,6 +1,6 @@
 {
     "name": "specio",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "private": true,
     "description": "Detect the technologies a website is built with.",
     "license": "Apache-2.0",
