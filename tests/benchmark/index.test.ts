@@ -6,12 +6,26 @@
 
 import { describe, expect, test } from "bun:test";
 import { detectTechnologies } from "../../internal/lib/detect/index.ts";
+import { RULES } from "../../internal/lib/rules/index.ts";
 import { FIXTURES } from "../fixtures/index.ts";
 
 const PRECISION_GATE = 0.95;
 const RECALL_GATE = 0.8;
 
 describe("golden corpus", () => {
+	test("every rule ships a fixture", () => {
+		const covered = new Set(FIXTURES.map((f) => f.expectedId));
+		const uncovered = RULES.map((r) => r.id).filter(
+			(id) => !covered.has(id),
+		);
+		expect(uncovered).toEqual([]);
+	});
+
+	test("rule ids are unique", () => {
+		const ids = RULES.map((r) => r.id);
+		expect(new Set(ids).size).toBe(ids.length);
+	});
+
 	for (const fixture of FIXTURES) {
 		test(`${fixture.expectedId} is detected from its fixture`, () => {
 			const detected = detectTechnologies(fixture.signals);
