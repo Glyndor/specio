@@ -4,6 +4,8 @@
     "version": "0.1.0",
     "description": "__MSG_extensionDescription__",
     "default_locale": "en",
+    "permissions": ["webRequest"],
+    "host_permissions": ["<all_urls>"],
     "action": {
         "default_popup": "popup/index.html",
         "default_title": "__MSG_extensionName__"
