@@ -46,10 +46,12 @@ function send(jsGlobals: string[]): void {
 let sent = false;
 
 // The MAIN-world script posts the page's global names. Validate the message
-// (same window, expected shape) and bound it before trusting it.
+// (same window, expected shape) and bound it before trusting it. Only the first
+// accepted message is used, so a hostile page cannot replay it to force
+// repeated detection runs in the worker.
 window.addEventListener("message", (event) => {
 	const data = event.data as { source?: unknown; globals?: unknown };
-	if (event.source !== window || data?.source !== "specio:globals") {
+	if (sent || event.source !== window || data?.source !== "specio:globals") {
 		return;
 	}
 	sent = true;
