@@ -1,10 +1,15 @@
-// Content script: collects the detection signals already present in the page
-// (URL, markup, script URLs, meta tags, cookie names) and forwards them to the
-// service worker for matching. It only reads the page; nothing is sent
-// off-device. Response headers and the resolved IP are added by the worker
-// from the request it already observed — the content script cannot see them.
+// Content script (isolated world): collects the detection signals already
+// present in the page (URL, markup, script URLs, meta tags, cookie names) and
+// forwards them to the service worker for matching. The page's `window` globals
+// live in the MAIN world, so a companion script (main-world.ts) reads their
+// names and posts them here; that message is untrusted (the page could forge
+// it), so it is validated and bounded. Response headers and the resolved IP are
+// added by the worker. It only reads the page; nothing is sent off-device.
 
 import type { PageSignals } from "../lib/signals/index.ts";
+
+/** Maximum number of global names accepted from the MAIN-world message. */
+const MAX_GLOBALS = 500;
 
 /** Read the cookie names visible to the document (http-only cookies excluded). */
 function cookieNames(): string[] {
@@ -15,7 +20,7 @@ function cookieNames(): string[] {
 }
 
 /** Gather every page-local signal the matcher reads. */
-function collectSignals(): Omit<PageSignals, "headers"> {
+function collectSignals(jsGlobals: string[]): Omit<PageSignals, "headers"> {
 	return {
 		url: location.href,
 		html: document.documentElement.outerHTML,
@@ -27,11 +32,38 @@ function collectSignals(): Omit<PageSignals, "headers"> {
 			content: meta.getAttribute("content"),
 		})),
 		cookies: cookieNames(),
-		jsGlobals: [],
+		jsGlobals,
 	};
 }
 
-chrome.runtime.sendMessage({
-	type: "page-signals",
-	signals: collectSignals(),
+function send(jsGlobals: string[]): void {
+	chrome.runtime.sendMessage({
+		type: "page-signals",
+		signals: collectSignals(jsGlobals),
+	});
+}
+
+let sent = false;
+
+// The MAIN-world script posts the page's global names. Validate the message
+// (same window, expected shape) and bound it before trusting it.
+window.addEventListener("message", (event) => {
+	const data = event.data as { source?: unknown; globals?: unknown };
+	if (event.source !== window || data?.source !== "specio:globals") {
+		return;
+	}
+	sent = true;
+	const globals = Array.isArray(data.globals)
+		? data.globals
+				.filter((name): name is string => typeof name === "string")
+				.slice(0, MAX_GLOBALS)
+		: [];
+	send(globals);
 });
+
+// Fall back to sending without globals if the MAIN-world message never arrives.
+setTimeout(() => {
+	if (!sent) {
+		send([]);
+	}
+}, 300);
