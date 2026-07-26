@@ -3,7 +3,7 @@
     "version": "0.3.2",
     "private": true,
     "description": "Detect the technologies a website is built with.",
-    "license": "Apache-2.0",
+    "license": "MIT",
     "type": "module",
     "scripts": {
         "lint": "biome check",

@@ -61,4 +61,4 @@ without false-positiving.
 
 ## License
 
-[Apache-2.0](LICENSE).
+[MIT](LICENSE).

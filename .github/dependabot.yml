@@ -1,0 +1,24 @@
+version: 2
+
+updates:
+  # The extension itself (package.json + bun.lock). A browser extension ships
+  # its dependencies to the user's browser, so an advisory here lands on every
+  # install, not on a server I control.
+  - package-ecosystem: "bun"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "type:deps"
+    open-pull-requests-limit: 10
+    target-branch: "develop"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "type:deps"
+      - "type:ci"
+    open-pull-requests-limit: 10
+    target-branch: "develop"
