@@ -19,7 +19,7 @@
         "test": "bun test"
     },
     "devDependencies": {
-        "@biomejs/biome": "^2.0.0",
+        "@biomejs/biome": "^2.5.7",
         "@types/bun": "^1.1.0",
         "@types/chrome": "^0.0.268",
         "typescript": "^5.4.0"
