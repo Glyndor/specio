@@ -11,6 +11,12 @@ permissions:
 
 jobs:
   bun:
-    uses: Glyndor/.github/.github/workflows/bun-ci.yml@80523422631014f591b07bc24c507145faabb271 # v1.2.0
+    uses: Glyndor/.github/.github/workflows/bun-ci.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
     with:
       coverage-threshold: 90
+  pin-policy:
+    uses: Glyndor/.github/.github/workflows/pin-policy-reusable.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
+  dependabot-freshness:
+    uses: Glyndor/.github/.github/workflows/dependabot-freshness.yml@d4bbc5b6ec0c351ca4cb17d948ceaad818da4078 # v1.18.1
+    with:
+      max-age-days: 15
