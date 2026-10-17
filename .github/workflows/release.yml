@@ -108,7 +108,7 @@ jobs:
           name: extension-zip
       - name: Upload and publish
         env:
-          EXTENSION_ID: ${{ secrets.CWS_EXTENSION_ID }}
+          EXTENSION_ID: ${{ secrets.SPECIO_CWS_EXTENSION_ID }}
           CLIENT_ID: ${{ secrets.CWS_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CWS_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.CWS_REFRESH_TOKEN }}
@@ -116,7 +116,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${EXTENSION_ID}" ] || [ -z "${CLIENT_ID}" ] || [ -z "${CLIENT_SECRET}" ] || [ -z "${REFRESH_TOKEN}" ]; then
-            echo "::notice::Chrome Web Store secrets not set — skipping store publish (the GitHub release still shipped). Set CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET and CWS_REFRESH_TOKEN to enable it."
+            echo "::notice::Chrome Web Store secrets not set — skipping store publish (the GitHub release still shipped). Set SPECIO_CWS_EXTENSION_ID, CWS_CLIENT_ID, CWS_CLIENT_SECRET and CWS_REFRESH_TOKEN to enable it."
             exit 0
           fi
 
